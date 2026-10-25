@@ -55,7 +55,8 @@ export default function App(){
         return true // 'all'
     })
 
-    const itemsLeft = sampleTodos.filter((todo) => !todo.done).length
+    // Count from the live state, not the hard-coded starting data
+    const itemsLeft = todos.filter((todo) => !todo.done).length
     const hasCompleted = todos.some((todo) => todo.done)
 
     const emptyMessages = {
@@ -82,6 +83,10 @@ export default function App(){
                 onFilterChange={setFilter}
                 hasCompleted={hasCompleted}
                 onClearCompleted={clearCompleted} />
+            
+            <footer className="credit">
+                Double-click a todo to edit · <a href="https://github.com/AAU-SE-Projects/ToDo_App" target='_blank'>Source on GitHub</a>
+            </footer>
         </main>
     )
 }
