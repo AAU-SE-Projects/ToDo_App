@@ -1,6 +1,6 @@
 import TodoItem from './TodoItem';
 
-export default function TodoList({ todos, onDelete }){
+export default function TodoList({ todos, onDelete, onEdit, onToggle }){
     // Show a message insteaf of an empty list
     if(todos.length === 0){
         return <p className='empty'>Nothing to do</p>

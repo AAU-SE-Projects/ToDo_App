@@ -18,7 +18,7 @@ export default function TodoItem({ todo, onDelete, onEdit, onToggle }){
 
     // All three ways of editing edit mode (Enter, Escape, clicking away)
     // End up here, so the logic lives in one place
-    function handleBlue(){
+    function handleBlur(){
         setIsEditing(false)
 
         if(cancelledRef.current){
@@ -28,20 +28,67 @@ export default function TodoItem({ todo, onDelete, onEdit, onToggle }){
 
         const trimmed = draft.trim()
         if(!trimmed){
-            
+            onDelete(todo.id)
+        } else if(trimmed !== todo.text){
+            onEdit(todo.id, trimmed)
         }
     }
-    
+
+    function handleKeyDown(event){
+        if(event.key === "Enter"){
+            event.currentTarget.blur() // Leaving ht input triggers handleBlur => save
+        }
+        if(event.key === "Escape"){
+            cancelledRef.current = true // Tell handleBlur not to save
+            event.currentTarget.blur()
+        }
+    }
+
+    // Edit mode: Show an inpuyt instead of the text
+    if(isEditing){
+        return(
+            <li className="todo-item editing">
+                <input className="edit-input"
+                    aria-label='edit todo'
+                    value={draft}
+                    onChange={(event) => setDraft(event.target.value)}
+                    onBlur={handleBlur}
+                    onKeyDown={handleKeyDown}
+                    autoFocus
+                />
+            </li>
+        )
+    }
+
+    // Normal mode
     return(
         <li className={todo.done ? 'todo-item done' : 'todo-item'}>
-            <input type="checkbox" checked={todo.done} readOnly />
-            <span className="todo-text">{todo.text}</span>
-            <button className="delete"
+            <input
+                type="checkbox"
+                checked={todo.done}
+                onChange={() => onToggle(todo.id)}
+                aria-label={`Mark "${todo.text}" as ${todo.done ? "not done" : "done"}`}
+            />
+            
+            <span className="todo-text" onDoubleClick={startEditing}>
+                {todo.text}
+            </span>
+            
+            <button
+                className="edit"
+                aria-label={`Edit ${todo.text}`}
+                onClick={startEditing}
+            >
+                ✎
+            </button>
+            
+            <button
+                className="delete"
                 aria-label={`Delete ${todo.text}`}
                 onClick={() => onDelete(todo.id)}
-                >
-                    ✕
-                </button>
+            >
+                ✕
+            </button>
         </li>
     )
 }
