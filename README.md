@@ -4,7 +4,7 @@ A clean, responsive todo app built with React. No backend: todos are saved in th
 
 **🔗 Live demo:** https://reactapptodoaau.netlify.app/
 
-![Screenshot](./public/image.png)
+![Screenshot](./frontend/public/image.png)
 
 ## Features
 - Add, edit (double-click), complete and delete todos
