@@ -6,9 +6,7 @@ import FilterBar from './components/FilterBar';
 
 //Fake data for now
 const sampleTodos = [
-    { id: '1', text: 'Learn React props', done: true, createdAt: Date.now() },
-    { id: '2', text: 'Add state to the prop', done: false, createdAt: Date.now() },
-    { id: '3', text: 'Deploy to a server', done: false, createdAt: Date.now() },
+    { id: '1', text: 'Your first task!', done: true, createdAt: Date.now() },
 ]
 
 export default function App(){
