@@ -2,7 +2,7 @@
 
 A clean, responsive todo app built with React. No backend: todos are saved in the browser with localStorage.
 
-**🔗 Live demo:** https://soon!
+**🔗 Live demo:** https://reactapptodoaau.netlify.app/
 
 ![Screenshot](./public/image.png)
 
